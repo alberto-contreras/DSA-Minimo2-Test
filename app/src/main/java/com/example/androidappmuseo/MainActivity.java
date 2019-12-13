@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.androidappmuseo.models.Element;
 import com.example.androidappmuseo.models.Museums;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     List<Element> listofmuseums;
     JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView museumsRV;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        progressBar = findViewById(R.id.progressBar4);
+        progressBar.setVisibility(View.VISIBLE);
         //HOW TO PRESENT THE LIST OF ITEMS
         museumsRV = (RecyclerView) findViewById(R.id.RecyclerMuseums);
         museumsRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -49,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Museums> call, Response<Museums> response) {
                 if (response.isSuccessful()) {
                     Museums museums = response.body();
-                    //showProgress( false );
                     listofmuseums = museums.getElements();
 
                     for (Element elem: listofmuseums) {
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     MyMuseumRecyclerViewAdapter adapter1 = new MyMuseumRecyclerViewAdapter(listofmuseums);//Create the adapter and send the list of museum
+                    progressBar.setVisibility(View.GONE);
                     museumsRV.setAdapter(adapter1);//Set the adapter
                 }
 
