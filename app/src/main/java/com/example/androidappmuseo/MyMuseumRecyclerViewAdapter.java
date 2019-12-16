@@ -48,7 +48,7 @@ public class MyMuseumRecyclerViewAdapter extends RecyclerView.Adapter<MyMuseumRe
         public ImageView imgMuseum;
         public TextView tvMuseum;
 
-        public ViewHolderData(@NonNull View itemView) { //Refrence the variable to each component
+        public ViewHolderData(@NonNull View itemView) { //Reference the variable to each component
             super(itemView);
             //Know make reference
             imgMuseum = itemView.findViewById(R.id.museumimage);
