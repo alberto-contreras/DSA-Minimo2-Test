@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        progressBar = findViewById(R.id.progressBar4);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);// Show progress bar
         //HOW TO PRESENT THE LIST OF ITEMS
         museumsRV = (RecyclerView) findViewById(R.id.RecyclerMuseums);
         museumsRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     MyMuseumRecyclerViewAdapter adapter1 = new MyMuseumRecyclerViewAdapter(listofmuseums);//Create the adapter and send the list of museum
-                    progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);//close progress bar
                     museumsRV.setAdapter(adapter1);//Set the adapter
                 }
 
